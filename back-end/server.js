@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const PORT = 3001;
 const bodyParser = require('body-parser')
 
 
@@ -8,14 +9,14 @@ app.get('/', function (req, res) {
 })
 
 // Middleware
-app.use(morgan("dev"));
+//app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 
 
-app.listen(3001, () => {
+app.listen(PORT, () => {
     console.log(
-      `Listening on port 3001 👍`
+      `Listening on port ${PORT} 👍`
     );
   });
