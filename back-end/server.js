@@ -1,16 +1,25 @@
 const express = require('express');
-const app = express();
 const PORT = 3001;
 const bodyParser = require('body-parser');
 const morgan = require("morgan");
-const db = require("./database");
+const db = require("./database/connection");
 
+
+
+
+
+const app = express();
 const users = require("./routes/users");
+
+const { getAllUsers } = require('./database/queries')
+
 
 //routes
 
 app.get('/', function (req, res) {
-  res.send('Hello World')
+ getAllUsers((users) => {
+   res.json(users)
+ });
 });
 
 app.use("/users", users);
@@ -22,7 +31,7 @@ app.use(bodyParser.json())
 
 
 app.listen(PORT, () => {
-    console.log(
-      `Listening on port ${PORT} 👍`
-    );
-  });
+  console.log(
+    `Listening on port ${PORT} 👍`
+  );
+});

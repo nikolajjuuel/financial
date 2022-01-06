@@ -20,11 +20,5 @@ client.connect(() => {
     console.log('connected to the database');
 });
 
-client.query('SELECT * FROM users')
-    .then((result) => {
-        console.log(result.rows);
-        client.end();
-    }
-    );
 
 module.exports = client;
