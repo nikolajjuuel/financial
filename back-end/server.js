@@ -2,16 +2,12 @@ const express = require('express');
 const PORT = 3001;
 const bodyParser = require('body-parser');
 const morgan = require("morgan");
-const db = require("./database/connection");
-
-
-
 
 
 const app = express();
 const users = require("./routes/users");
 
-const { getAllUsers } = require('./database/queries')
+const { getAllUsers, getUserById } = require('./database/queries')
 
 
 //routes
@@ -21,6 +17,17 @@ app.get('/', function (req, res) {
    res.json(users)
  });
 });
+
+app.get('/:id', (req, res) => {
+  const id = req.params.id;
+  console.log('IDDDD', id)
+
+  getUserById(id)
+    .then((user) => {
+      res.json(user);
+    }
+    )
+ });
 
 app.use("/users", users);
 
